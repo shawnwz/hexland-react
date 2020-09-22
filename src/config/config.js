@@ -1,0 +1,1 @@
+export const getAllUrl = "http://150.158.237.17:10050/getAll";
