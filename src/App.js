@@ -11,14 +11,16 @@ class App extends Component {
    constructor(props) {
      super(props);
      this.state = {
-       list: []
+       list: [],
+       loaded: false
      }
    }
   
   componentWillMount(){
     axios.get("http://150.158.237.17:10050/getAll").then((res)=>{
                             this.setState({
-                              list:res.data
+                              list:res.data,
+                              loaded:true
                            })
                         })
   }
@@ -28,6 +30,7 @@ class App extends Component {
   render () {
     return (
         <div>
+        { this.state.loaded ?
           <HexGrid width={1200} height={800} viewBox="0 -10 100 100">
           <Layout size={{ x: 2, y: 2 }} origin={{ x: 0, y: 0 }}>
             {
@@ -43,6 +46,9 @@ class App extends Component {
             }
           </Layout>
           </HexGrid>
+          :
+          <Loader />
+        }
         </div>
      
     );
